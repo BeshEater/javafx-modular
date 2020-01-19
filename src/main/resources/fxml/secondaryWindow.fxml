@@ -4,9 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox id="secondary-window" xmlns="http://javafx.com/javafx/11.0.1" stylesheets="@../css/secondaryWindow.css" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.besheater.javafxmodular.controller.SecondaryController">
+<VBox id="secondary-window" stylesheets="@../css/secondaryWindow.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.besheater.javafxmodular.controller.SecondaryController">
    <children>
-      <Label text="This is secondary window" />
+      <Label fx:id="textLabel" />
       <Button fx:id="closeBtn" mnemonicParsing="false" onAction="#closeBtnPressed" text="Close" />
    </children>
 </VBox>
