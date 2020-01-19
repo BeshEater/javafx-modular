@@ -1,0 +1,17 @@
+#primary-window {
+    -fx-pref-width: 600;
+    -fx-pref-height: 400;
+    -fx-min-width: 400;
+    -fx-min-height: 300;
+}
+
+VBox {
+    -fx-spacing: 5;
+    -fx-alignment: center;
+}
+
+Label {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+

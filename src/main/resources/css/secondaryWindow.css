@@ -1,0 +1,11 @@
+#secondary-window {
+    -fx-pref-width: 300;
+    -fx-pref-height: 200;
+    -fx-min-width: 300;
+    -fx-min-height: 200;
+}
+
+VBox {
+    -fx-spacing: 5;
+    -fx-alignment: center;
+}
