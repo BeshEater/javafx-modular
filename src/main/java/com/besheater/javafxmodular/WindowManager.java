@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -26,7 +27,7 @@ public class WindowManager {
     private Parent loadFXML(String fxmlFileName) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(App.class.getResource("/fxml/" + fxmlFileName + ".fxml"));
-        loader.setResources(ResourceBundle.getBundle("/properties/guitext", Locale.getDefault()));
+        loader.setResources(ResourceBundle.getBundle("properties.guitext", Locale.getDefault()));
         return loader.load();
     }
 

@@ -11,6 +11,63 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
+    <profiles>
+        <profile>
+            <!-- Must use this profile to make uber-jar with standard mvn package-->
+            <id>uberjar</id>
+            <!-- Cross-platform dependencies-->
+            <dependencies>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-graphics</artifactId>
+                    <version>${javafx.version.main}</version>
+                    <classifier>win</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-graphics</artifactId>
+                    <version>${javafx.version.main}</version>
+                    <classifier>linux</classifier>
+                </dependency>
+                <dependency>
+                    <groupId>org.openjfx</groupId>
+                    <artifactId>javafx-graphics</artifactId>
+                    <version>${javafx.version.main}</version>
+                    <classifier>mac</classifier>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <!-- Shade plugin for uber-jar packaging-->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                                <configuration>
+                                    <shadedArtifactAttached>true</shadedArtifactAttached>
+                                    <shadedClassifierName>project-classifier</shadedClassifierName>
+                                    <outputFile>shade\${project.artifactId}.jar</outputFile>
+                                    <transformers>
+                                        <transformer implementation=
+                                                             "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                            <mainClass>com.besheater.javafxmodular.Launcher</mainClass>
+                                        </transformer>
+                                    </transformers>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -33,27 +90,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
-        <!-- Cross-platform uber-jar dependencies-->
-        <!--
-          <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>${javafx.version.main}</version>
-            <classifier>win</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>${javafx.version.main}</version>
-            <classifier>linux</classifier>
-        </dependency>
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-graphics</artifactId>
-            <version>${javafx.version.main}</version>
-            <classifier>mac</classifier>
-        </dependency>
-        -->
     </dependencies>
     <build>
         <plugins>
@@ -111,6 +147,7 @@
                                         <artifactId>commons-lang3</artifactId>
                                         <version>3.9</version>
                                     </artifact>
+                                    <!-- Might use jdeps to generate prototype module-info -->
                                     <moduleInfoSource>
                                         module org.apache.commons.lang3 {
                                         requires transitive java.desktop;
